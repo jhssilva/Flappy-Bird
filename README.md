@@ -1,2 +1,2 @@
-# Flapy Bird
- The famous game Flaby bird developed in Java
+# Flappy Bird
+ The famous game Flappy bird developed in Java
