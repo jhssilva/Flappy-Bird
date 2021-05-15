@@ -16,20 +16,17 @@ public class FlappyGame extends ApplicationAdapter {
 	public SpriteBatch batch;
 	public BitmapFont font;
 	ShapeRenderer shapeRenderer;
-	Texture texture, 
+	Texture texture_background, 
 			pipe_bellow,
 			pipe_above;
 	
 	float x = 0;
-	float y = 0;
+	float y = -100;
 	int srcX = 0;
 	int srcY =  0;
 	int srcWidth = 100;
 	int srcHeight = 100;
 	
-	int windows_width;
-	int windows_height;
-
 	float circleX = 100;
 	float circleY = 50;
 	
@@ -39,7 +36,14 @@ public class FlappyGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		game = new Game();
+		// Create game configuration
+		this.game = new Game();
+		this.game.init(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		
+		// Painting configuration
+		batch = new SpriteBatch();
+		texture_background = new Texture(Gdx.files.internal("fund.jfif"));
+		shapeRenderer = new ShapeRenderer();
 		
 		/*
 		batch = new SpriteBatch();
@@ -56,9 +60,25 @@ public class FlappyGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
+		// Painting background
+		Gdx.gl.glClearColor(86/255f, 193/255f, 203/255f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		
+		batch.begin();
+		batch.draw(texture_background,x,y,game.getWorld().getWindow().getWeight(), game.getWorld().getWindow().getHeight());
+		batch.end();
 		
+		
+		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
+			this.game.setUp(true);
+		}
+		
+		this.game.interaction();
+		
+		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+		shapeRenderer.circle(game.getWorld().getBird().getPos().getX(), game.getWorld().getBird().getPos().getY(), 10);
+		shapeRenderer.end();
 		
 		/*
 		Gdx.gl.glClearColor(.25f, .25f, .25f, 1);
@@ -71,26 +91,7 @@ public class FlappyGame extends ApplicationAdapter {
 		font.draw(batch, "Flappy Bird", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
 		batch.end();
 		
-		
-		//Movement (Do better phisics)
-		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			circleY += 2 * ySpeed;
-		}else {
-			circleY -= ySpeed;
-		}
-			
-		
-
-		//ends
-		if(circleX < 0 || circleX > Gdx.graphics.getWidth()) {
-			
-		}
-		
-		if(circleY < 0 || circleY > Gdx.graphics.getHeight()) {
-			
-		}
-		
-		
+				
 		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
 		shapeRenderer.setColor(255,0,0,1);
 		shapeRenderer.circle(circleX, circleY, 10);
@@ -103,9 +104,9 @@ public class FlappyGame extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		/*batch.dispose();
+		batch.dispose();
 		font.dispose();
-		*/
+		
 	}
 	
 }
