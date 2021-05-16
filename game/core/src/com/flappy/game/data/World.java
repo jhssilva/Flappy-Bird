@@ -6,7 +6,6 @@ public class World {
 	Bird bird;
 	ArrayList<Pipe> pipes;
 	Dimensions window;
-	private float gravity = 9.8f;
 	
 	public World() {
 		super();
@@ -18,11 +17,24 @@ public class World {
 	}
 	
 	public void config() {
-		//set bird
-		this.setBird(new Bird(new Pos(this.getWindow().getWeight() / 2,
-				this.getWindow().getHeight() / 2)));
-		this.getBird().setSpeed(new Speed(0, this.getGravity()));
+		this.configBird();		
+		this.configPipes();
 	}
+	
+	private void configPipes() {
+		pipes = new ArrayList<Pipe>();
+		
+		Pipe aux_pipe = new Pipe();
+		
+		pipes.add(aux_pipe);
+	}
+	
+	private void configBird() {
+		this.setBird(new Bird(new Pos(100,
+				300)));
+		this.getBird().setSpeed(new Speed(0, -this.getBird().getGravity()));
+	}
+
 	
 	public Bird getBird() {
 		return bird;
@@ -43,13 +55,5 @@ public class World {
 		this.window = window;
 	}
 
-	public float getGravity() {
-		return gravity;
-	}
-
-	public void setGravity(float gravity) {
-		this.gravity = gravity;
-	}
-	
 
 }

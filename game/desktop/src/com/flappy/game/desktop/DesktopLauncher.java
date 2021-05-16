@@ -7,9 +7,10 @@ import com.flappy.game.FlappyGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "Flappy Bird";
-		config.width = 600;
-		config.height = 800;	
+		config.title = FlappyGame.TITLE;
+		config.width = FlappyGame.WIDTH;
+		config.height = FlappyGame.HEIGHT;	
+		config.foregroundFPS = 60;
 		
 		new LwjglApplication(new FlappyGame(), config);
 	}

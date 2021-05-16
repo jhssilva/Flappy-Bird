@@ -13,27 +13,16 @@ public class FlappyGame extends ApplicationAdapter {
 	
 	private Game game;
 	
+	public static final int WIDTH = 480;
+	public static final int HEIGHT = 800;
+	public static final String TITLE = "Flappy Bird";
+	
 	public SpriteBatch batch;
 	public BitmapFont font;
 	ShapeRenderer shapeRenderer;
-	Texture texture_background, 
-			pipe_bellow,
-			pipe_above;
-	
-	float x = 0;
-	float y = -100;
-	int srcX = 0;
-	int srcY =  0;
-	int srcWidth = 100;
-	int srcHeight = 100;
-	
-	float circleX = 100;
-	float circleY = 50;
-	
-	float xSpeed = 0;
-	float ySpeed = 2;
-	
-	
+	Texture texture_background;
+		
+
 	@Override
 	public void create () {
 		// Create game configuration
@@ -42,7 +31,7 @@ public class FlappyGame extends ApplicationAdapter {
 		
 		// Painting configuration
 		batch = new SpriteBatch();
-		texture_background = new Texture(Gdx.files.internal("fund.jfif"));
+		texture_background = new Texture(Gdx.files.internal("background.png"));
 		shapeRenderer = new ShapeRenderer();
 		
 		/*
@@ -66,19 +55,15 @@ public class FlappyGame extends ApplicationAdapter {
 		
 		
 		batch.begin();
-		batch.draw(texture_background,x,y,game.getWorld().getWindow().getWeight(), game.getWorld().getWindow().getHeight());
+		batch.draw(texture_background,0,0,game.getWorld().getWindow().getWeight(), game.getWorld().getWindow().getHeight());
+		batch.draw(this.game.getWorld().getBird().getTexture(), this.game.getWorld().getBird().getPos().getX(), this.game.getWorld().getBird().getPos().getY());
 		batch.end();
 		
-		
-		if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) || Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
-			this.game.setUp(true);
+		if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+			this.game.getWorld().getBird().BirdJump();	
 		}
 		
-		this.game.interaction();
-		
-		shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-		shapeRenderer.circle(game.getWorld().getBird().getPos().getX(), game.getWorld().getBird().getPos().getY(), 10);
-		shapeRenderer.end();
+		this.game.tick();
 		
 		/*
 		Gdx.gl.glClearColor(.25f, .25f, .25f, 1);

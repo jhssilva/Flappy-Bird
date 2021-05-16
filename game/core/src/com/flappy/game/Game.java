@@ -5,9 +5,8 @@ import com.flappy.game.data.Dimensions;
 import com.flappy.game.data.World;
 import com.flappy.game.data.Pos;
 
-public class Game {
+public class Game extends Thread {
 	private World world;
-	private boolean up = false;
 	private boolean run = false;
 	
 	public Game() {
@@ -19,7 +18,7 @@ public class Game {
 	public void init(float windows_width, float windows_height) {
 		this.world = new World(new Dimensions(windows_width, windows_height));
 		this.conf();
-		this.run();
+		this.setRun(true);
 	}
 	
 	// Function that sets the environment of the game
@@ -27,48 +26,34 @@ public class Game {
 		this.getWorld().config();
 	}
 	
-	private void run() {
-		this.run = true;
-	}
 	
 	//function that does a new interaction
-	public void interaction() {
+	public void tick() {
 		
-		//60 fps
-		this.fps60();
-		
-		//Verify if  the bird hit something.
-		
-		
-		//Move the bird
-		if(up) {
-			this.birdUp();
+		if(this.run) {
+					
+			this.checkColision();
+			this.birdMovement();
+			this.getWorld().getBird().setBirdGravityMovement();
+					
 		}else {
-			this.birdDown();
+			this.init(this.getWorld().getWindow().getWeight(), this.getWorld().getWindow().getHeight());
 		}
 		
-		this.setUp(false);
 	}
 	
-	private void fps60() {
-		System.out.println("set the fps function");
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public void checkColision() {
+		if(this.getWorld().getBird().getPos().getY() > this.getWorld().getWindow().getHeight()) {
+			this.getWorld().getBird().setBirdGravityMovement();
+		}else if(this.getWorld().getBird().getPos().getY() < 0) {
+			this.setRun(false);
 		}
 	}
 	
 	
-	private void birdUp() {
-		this.getWorld().getBird().BirdUp();
+	public void birdMovement(){
+		this.getWorld().getBird().birdMovement();
 	}
-	
-	private void birdDown() {
-		this.getWorld().getBird().BirdDown();
-	}
-	
 	
 	public World getWorld() {
 		return world;
@@ -86,13 +71,7 @@ public class Game {
 	public void setRun(boolean run) {
 		this.run = run;
 	}
+	
 
-	public boolean isUp() {
-		return up;
-	}
-
-	public void setUp(boolean up) {
-		this.up = up;
-	}
 	
 }
