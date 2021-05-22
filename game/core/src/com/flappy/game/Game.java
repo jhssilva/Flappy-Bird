@@ -35,7 +35,9 @@ public class Game extends Thread {
 			this.checkColision();
 			this.birdMovement();
 			this.getWorld().getBird().setBirdGravityMovement();
-					
+			this.world.movement();
+			
+			
 		}else {
 			this.init(this.getWorld().getWindow().getWeight(), this.getWorld().getWindow().getHeight());
 		}

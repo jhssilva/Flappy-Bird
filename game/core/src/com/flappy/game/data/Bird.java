@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Bird extends Object{
 	private String normal_bird= "bird1.png";
 	private String jump_bird = "bird2.png";
-	private float gravity = 4f;
+	private float gravity = 2.7f;
 	
 	
 	public Bird(Pos pos) {

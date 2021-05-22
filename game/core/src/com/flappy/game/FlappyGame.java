@@ -1,5 +1,7 @@
 package com.flappy.game;
 
+import java.util.Iterator;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.flappy.game.data.Pipe;
 
 public class FlappyGame extends ApplicationAdapter {
 	
@@ -57,6 +60,18 @@ public class FlappyGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(texture_background,0,0,game.getWorld().getWindow().getWeight(), game.getWorld().getWindow().getHeight());
 		batch.draw(this.game.getWorld().getBird().getTexture(), this.game.getWorld().getBird().getPos().getX(), this.game.getWorld().getBird().getPos().getY());
+		
+		Iterator<Pipe> iterator_pipes = this.game.getWorld().getPipes().iterator();
+		
+		while(iterator_pipes.hasNext()) {
+			Pipe aux = iterator_pipes.next();
+			batch.draw(aux.getPipe_texture(), aux.getPipe_top().getPos().getX(), aux.getPipe_top().getPos().getY());
+			batch.draw(aux.getPipe_texture(), aux.getPipe_bottom().getPos().getX(), aux.getPipe_bottom().getPos().getY());
+		}
+		
+		
+		
+		
 		batch.end();
 		
 		if(Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) || Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
