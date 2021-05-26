@@ -9,8 +9,9 @@ public class Pipe{
 	private String pipe_bottom_top = "tubebottomtop.png";
 	private String tube_bottom_down = "tubebottomdown.png";
 	private String tube_bottom_top = "tubebottomtop.png";
-	private float distance_between_y = 110;
-	private float distance_between_x = 225;
+	private int distance_between_y = 110;
+	private int distance_between_x = 225;
+	private int distance_between_y_combine = this.distance_between_y * 2;
 	private Pos pos;
 	private Texture pipe_texture,texture_tubebottom_down,texture_tubebottom_top;
 
@@ -66,6 +67,7 @@ public class Pipe{
 		
 		return false;
 	}
+	
 	
 	
 	
@@ -200,8 +202,19 @@ public class Pipe{
 	}
 
 
-	public void setDistance_between_y(float distance_between_y) {
+
+	public void setDistance_between_y(int distance_between_y) {
 		this.distance_between_y = distance_between_y;
+	}
+
+
+	public void setDistance_between_x(int distance_between_x) {
+		this.distance_between_x = distance_between_x;
+	}
+
+
+	public void setDistance_between_y_combine(int distance_between_y_combine) {
+		this.distance_between_y_combine = distance_between_y_combine;
 	}
 
 
@@ -209,10 +222,6 @@ public class Pipe{
 		return distance_between_x;
 	}
 
-
-	public void setDistance_between_x(float distance_between_x) {
-		this.distance_between_x = distance_between_x;
-	}
 
 
 	public Object getPipe_top() {
@@ -255,7 +264,9 @@ public class Pipe{
 	}
 
 
+	public float getDistance_between_y_combine() {
+		return distance_between_y_combine;
+	}
 
-	
 
 }
