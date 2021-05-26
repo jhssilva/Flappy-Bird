@@ -61,14 +61,17 @@ public class FlappyGame extends ApplicationAdapter {
 		batch.draw(texture_background,0,0,game.getWorld().getWindow().getWeight(), game.getWorld().getWindow().getHeight());
 		batch.draw(this.game.getWorld().getBird().getTexture(), this.game.getWorld().getBird().getPos().getX(), this.game.getWorld().getBird().getPos().getY());
 		
+		// Draw Pipes/Tubes
 		Iterator<Pipe> iterator_pipes = this.game.getWorld().getPipes().iterator();
 		
 		while(iterator_pipes.hasNext()) {
 			Pipe aux = iterator_pipes.next();
 			batch.draw(aux.getPipe_texture(), aux.getPipe_top().getPos().getX(), aux.getPipe_top().getPos().getY());
+			batch.draw(aux.getTexture_tubebottom_top(), aux.getTubebottom_top().getPos().getX(), aux.getTubebottom_top().getPos().getY());
+			
 			batch.draw(aux.getPipe_texture(), aux.getPipe_bottom().getPos().getX(), aux.getPipe_bottom().getPos().getY());
+			batch.draw(aux.getTexture_tubebottom_down(), aux.getTubebottom_down().getPos().getX(), aux.getTubebottom_down().getPos().getY());
 		}
-		
 		
 		
 		

@@ -47,7 +47,7 @@ public class World {
 		
 		while(iterator_pipes.hasNext()) {
 			Pipe aux = iterator_pipes.next();
-			aux.pipesMovement(2);
+			aux.pipesMovement(this.movement);
 		}
 		
 	}
