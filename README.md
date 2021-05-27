@@ -1,6 +1,7 @@
 # Flappy-Bird
 
 Flappy Bird game in Java with Libgdx librarie. Just a simple game to write some code and absorve the Object Oriented (OO) programming.
+![image](https://user-images.githubusercontent.com/24280639/119856158-6a5d2700-bf0a-11eb-91c5-d5b2db72b3a5.png)
 
 ## Built With
 
