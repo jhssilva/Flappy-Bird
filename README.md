@@ -1,52 +1,11 @@
 # Flappy-Bird
 
-Flappy Bird game in Java
-
-## Getting Started
-
-
-
-### Prerequisites
-
-
-### Installing
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
+Flappy Bird game in Java with Libgdx librarie. Just a simple game to write some code and absorve the Object Oriented (OO) programming.
 
 ## Built With
 
-* Java (https://www.python.org) - 2.7, 3.4+
+* Java (https://www.java.com/) 
 * Libgdx (https://libgdx.com/) 
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
