@@ -16,10 +16,10 @@ public class Pipe{
 	private Texture pipe_texture,texture_tubebottom_down,texture_tubebottom_top;
 
 	private float size_pipe_y = 444;
+	private float size_pipe_x = 76;
 	private float size_tubebottom_y = 35;
 	private float size_tubebottom_x = 80;
 
-	
 	private Object pipe_top, pipe_bottom, tubebottom_down, tubebottom_top;
 	
 	public Pipe() {
@@ -27,7 +27,6 @@ public class Pipe{
 	
 	}
 	
-
 	public Pipe(float pos_x, float pos_y) {
 		super();
 		//set textures
@@ -41,7 +40,7 @@ public class Pipe{
 		Pos pos_top = new Pos(pos_x, pos_y + distance_between_y + (size_pipe_y / 2));
 		this.pipe_top = new Object(pos_top); 
 		
-		Pos pos_tubebottom_top = new Pos(pos_x -2, (this.pipe_top.getPos().getY() - (this.size_tubebottom_y)));
+		Pos pos_tubebottom_top = new Pos(pos_x, (this.pipe_top.getPos().getY() - (this.size_tubebottom_y)));
 		this.tubebottom_top = new Object(pos_tubebottom_top);
 				
 		
@@ -49,26 +48,31 @@ public class Pipe{
 		Pos pos_bottom = new Pos(pos_x, (pos_y - distance_between_y - (size_pipe_y / 2)));
 		this.pipe_bottom = new Object(pos_bottom);
 		
-		Pos pos_tubebottom_down = new Pos(pos_x - 2 , (size_pipe_y + (this.pipe_bottom.getPos().getY())));
+		Pos pos_tubebottom_down = new Pos(pos_x, (size_pipe_y + (this.pipe_bottom.getPos().getY())));
 		this.tubebottom_down = new Object(pos_tubebottom_down);
 	}
 
 	// Function that handles pipesMovement
 	public void pipesMovement(float movement) {
-		this.pipe_bottom.getPos().setX(this.pipe_bottom.getPos().getX() - movement);
-		this.tubebottom_down.getPos().setX(this.tubebottom_down.getPos().getX() - movement);
-		this.pipe_top.getPos().setX(this.pipe_top.getPos().getX() - movement);
-		this.tubebottom_top.getPos().setX(this.tubebottom_top.getPos().getX() - movement);
+		float x = this.pos.getX() - movement;
+		this.pos.setX(x);
+		this.pipe_bottom.getPos().setX(x);
+		this.tubebottom_down.getPos().setX(x-3);
+		this.pipe_top.getPos().setX(x);
+		this.tubebottom_top.getPos().setX(x-3);
 	}
 	
 	
 	// Function that handles bird collision with pipes
 	public boolean checkColisionWithPipe(Pos pos) {
-		
+		// Maybe add the size of the bird (Receiving it in the input of the function)
+		if(pos.getX() >= (this.getPos().getX() - (this.size_pipe_x / 2)) && pos.getX() <= (this.getPos().getX() + this.size_pipe_x/2)) {
+			if(pos.getY() <= this.tubebottom_down.getPos().getY() + this.size_tubebottom_y || pos.getY() >= this.tubebottom_top.getPos().getY() - this.size_tubebottom_y) {
+				return true;	
+			}
+		}
 		return false;
 	}
-	
-	
 	
 	
 	public float getSize_tubebottom_y() {
@@ -266,6 +270,16 @@ public class Pipe{
 
 	public float getDistance_between_y_combine() {
 		return distance_between_y_combine;
+	}
+
+
+	public float getSize_pipe_x() {
+		return size_pipe_x;
+	}
+
+
+	public void setSize_pipe_x(float size_pipe_x) {
+		this.size_pipe_x = size_pipe_x;
 	}
 
 

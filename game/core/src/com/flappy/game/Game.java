@@ -1,7 +1,10 @@
 package com.flappy.game;
 
+import java.util.Iterator;
+
 import com.flappy.game.data.Bird;
 import com.flappy.game.data.Dimensions;
+import com.flappy.game.data.Pipe;
 import com.flappy.game.data.World;
 import com.flappy.game.data.Pos;
 
@@ -25,18 +28,19 @@ public class Game extends Thread {
 	private void conf() {
 		this.getWorld().config();
 	}
-	
-	
+		
 	//function that does a new interaction
 	public void tick() {
 		
 		if(this.run) {
 					
-			this.checkColision();
-			this.birdMovement();
-			this.getWorld().getBird().setBirdGravityMovement();
-			this.world.movement();
-			
+			if(this.checkColision()) {
+				this.run = false;
+			}else {
+				this.birdMovement();
+				this.getWorld().getBird().setBirdGravityMovement();
+				this.world.movement();		
+			}
 			
 		}else {
 			this.init(this.getWorld().getWindow().getWeight(), this.getWorld().getWindow().getHeight());
@@ -44,12 +48,28 @@ public class Game extends Thread {
 		
 	}
 	
-	public void checkColision() {
+	public boolean checkColision() {		
+		
 		if(this.getWorld().getBird().getPos().getY() > this.getWorld().getWindow().getHeight()) {
 			this.getWorld().getBird().setBirdGravityMovement();
 		}else if(this.getWorld().getBird().getPos().getY() < 0) {
-			this.setRun(false);
+			return true;
 		}
+		
+		//Check collision against pipes
+		Iterator<Pipe> iterator_pipes = this.getWorld().getPipes().iterator();
+		Pos bird_pos = this.getWorld().getBird().getPos();
+		Pipe aux;
+		while(iterator_pipes.hasNext()) {
+			aux = iterator_pipes.next();
+		
+			if(aux.checkColisionWithPipe(bird_pos)) {
+				return true;
+			}
+			
+		}
+		
+		return false;
 	}
 	
 	

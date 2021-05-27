@@ -48,6 +48,8 @@ public class FlappyGame extends ApplicationAdapter {
 		circleX = windows_width / 8;
 		circleY = windows_height / 2;
 		*/
+
+
 	}
 
 	@Override

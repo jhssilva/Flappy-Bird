@@ -61,6 +61,6 @@ public class Bird extends Object{
 	public void setGravity(float gravity) {
 		this.gravity = gravity;
 	}
-	
+
 	
 }

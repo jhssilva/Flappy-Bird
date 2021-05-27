@@ -14,6 +14,7 @@ public class World {
 	private int pipe_max_y;
 	private int pipe_min_y;
 	private int pipe_size_y;
+	private int tubes = 200;
 	
 	public World() {
 		super();
@@ -26,7 +27,7 @@ public class World {
 		Pipe aux_0 = new Pipe(0,0);
 		this.setPipe_size_y((int)aux_0.getSize_pipe_y());
 		this.pipe_max_y = (int)this.window.getHeight()- (int)(aux_0.getDistance_between_y_combine() + (aux_0.getSize_pipe_y()/2) + 50);
-		this.pipe_min_y = (int)(aux_0.getSize_pipe_y()/2 - (aux_0.getDistance_between_y_combine()));
+		this.pipe_min_y = (int)(aux_0.getSize_pipe_y()/2 + 50 - (aux_0.getDistance_between_y_combine()));
 
 	}
 	
@@ -38,7 +39,7 @@ public class World {
 	private void configPipes() {
 		pipes = new ArrayList<Pipe>();
 		Pipe aux_pipe;
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < this.tubes; i++) {
 			aux_pipe = new Pipe(window.getWeight()+ (i * this.space_between_pipes), this.getRandomHeightPipe());
 			pipes.add(aux_pipe);	
 		}
@@ -54,13 +55,15 @@ public class World {
 			
 		// Pipes
 		Iterator<Pipe> iterator_pipes = this.getPipes().iterator();
-		
+		Pipe aux;
 		while(iterator_pipes.hasNext()) {
-			Pipe aux = iterator_pipes.next();
+			aux = iterator_pipes.next();
 			aux.pipesMovement(this.movement);
 		}
 		
 	}
+	
+
 	
 	public int getRandomHeightPipe() {
 		return this.getRandomNumberBetween(this.pipe_min_y, this.pipe_max_y);
@@ -120,6 +123,5 @@ public class World {
 	public void setPipe_size_y(int pipe_size_y) {
 		this.pipe_size_y = pipe_size_y;
 	}
-
 
 }
